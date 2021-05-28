@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
-            'email' => ['required', 'email']
+            'email' => ['required', 'email', 'unique:notifies']
         ]);
 
         if(!$validator->fails()){
@@ -23,7 +23,7 @@ class HomeController extends Controller
             }
         }
         else{
-            return response()->json(['error'=>'message']);
+            return response()->json(['error'=>$validator->errors()->all()]);
         }
     }
 }

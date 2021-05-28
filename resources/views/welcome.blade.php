@@ -4,8 +4,26 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-          <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>Fueler</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="Fueler">
+        <meta name="description" content="Fueler is a portfolio-based platform for dreamers and doers, a community-led platform that helps you discover interesting people through their works. ">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://fueler.io/">
+        <meta property="og:title" content="Fueler">
+        <meta property="og:description" content="Fueler is a portfolio-based platform for dreamers and doers, a community-led platform that helps you discover interesting people through their works. ">
+        <meta property="og:image" content="{{asset('images/meta-fueler.png')}}">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://fueler.io/">
+        <meta property="twitter:title" content="Fueler">
+        <meta property="twitter:description" content="Fueler is a portfolio-based platform for dreamers and doers, a community-led platform that helps you discover interesting people through their works. ">
+        <meta property="twitter:image" content="{{asset('images/meta-fueler.png')}}">
 
         <!-- Fonts -->
         <link href="http://fonts.cdnfonts.com/css/metropolis-2" rel="stylesheet">
@@ -49,7 +67,12 @@
                 background-color: #fff;
                 border-radius: 9px;
                 overflow: hidden;
-                box-shadow: 0px 20px 54px rgb(0 154 175 / 22%);
+                /* box-shadow: 0px 0.5px 17px 0 rgb(0 154 175 / 22%); */
+                transition: 0.3s
+                
+            }
+            .input-group:hover{
+                box-shadow: 0px 5px 17px 0 rgb(0 154 175 / 22%) !important;
             }
             input{
                     height: 100% !important;
@@ -96,26 +119,35 @@
              <div class="mt-5 mb-4 text-center">
                 <h1>Something cool is coming soon ⚡</h1>
             </div>
+           
             <div class="row justify-content-center pt-4">
                  <div class="col-md-4">
-                        <form id="notifyMe" action="#" enctype="multipart/form-data">
+                    <form id="notifyMe" action="#" enctype="multipart/form-data">
 
-								@csrf	
-                            <div class="input-group d-flex">
-                                <input class="form-control form-control-lg" type="email" required="" name="email" placeholder="Email address">
-                                <div class="loading-image" id="loading-image">
-                                    <img style="width: 40px;" src="{{asset('images/form-loader.gif')}}" alt="">
-                                </div>
-                                <div class="input-group-append">
-                                
-                                    <button class="btn" id="notify" type="submit">Notify Me</button>
-                                </div>
-                            
+                            @csrf	
+                        <div class="input-group d-flex shadow-sm">
+                            <input class="form-control form-control-lg" type="email" required="" name="email" placeholder="Email address">
+                            <div class="loading-image" id="loading-image">
+                                <img style="width: 40px;" src="{{asset('images/form-loader.gif')}}" alt="">
                             </div>
+                            <div class="input-group-append">
                             
-                        </form>
-                        <div id="successmsg" class="successmsg"></div>
-                    </div>
+                                <button class="btn" id="notify" type="submit">Notify Me</button>
+                            </div>
+                        
+                        </div>
+                        
+                    </form>
+
+                    
+
+                    <div id="successmsg" class="successmsg"></div>
+                        <div class="text-center mt-2">
+                            <a href="https://twitter.com/FuelerHQ" target="_blank" rel="follow">
+                                <img src="{{asset('images/twitter.png')}}" width="50px" alt="">
+                            </a>
+                        </div>
+                </div>
             </div>
         </div>
         
@@ -180,7 +212,11 @@
                     //     // $('#success_tic').modal('hide');
                         $('#successmsg').empty()
                     //     location.reload(); // then reload the page.(3)
-                    }, 2000); 
+                    }, 5000); 
+                    // if(data.error){
+                    //     console.log(data.error[0])
+                    // }
+                    
 
                 },
                 error:function(xhr){
@@ -188,12 +224,14 @@
                     enableSubmitButton()
                     hideloadingImage()
                     document.getElementById("notifyMe").reset(); 
+
+                    
                     $('#successmsg').html('<span>Thanks for taking interest in Fueler. We will get back to you with a good news very soon. </span>');
                      setTimeout(function(){// wait for 5 secs(2)
                     //     // $('#success_tic').modal('hide');
                         $('#successmsg').empty()
                     //     location.reload(); // then reload the page.(3)
-                    }, 2000); 
+                    }, 5000); 
                 }
             })
         });
